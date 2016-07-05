@@ -26,12 +26,12 @@ public class MySecurityConfigurer extends WebSecurityConfigurerAdapter {
 		protected void configure(final HttpSecurity http) throws Exception {
 
 			// Für H2-Konsole keine Authentifizierung. Diese ist nur in Profil "dev" aktiv, siehe oben...
-			http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
+			http.antMatcher("/h2-console/**").authorizeRequests().anyRequest().permitAll().and().csrf().disable();
 			http.headers().frameOptions().disable();
 		}
 		
 	}
-	
+
 	@Configuration
 	@Order(2)
 	public static class BasicAuthProtectionForApp extends WebSecurityConfigurerAdapter {
