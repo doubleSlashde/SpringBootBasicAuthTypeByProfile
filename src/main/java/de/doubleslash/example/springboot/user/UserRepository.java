@@ -1,4 +1,4 @@
-package de.doubleslash.example.springboot.jdbc;
+package de.doubleslash.example.springboot.user;
 
 import org.springframework.data.repository.CrudRepository;
 
