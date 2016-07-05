@@ -34,19 +34,6 @@ public class MySecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Configuration
 	@Order(2)
-	public static class AnonymousAccessPathConfig extends WebSecurityConfigurerAdapter {
-
-		@Override
-		protected void configure(final HttpSecurity http) throws Exception {
-			// alle ohne Auth erlaubt unter diesem Pfad
-			http.antMatcher("/anonymous/**").authorizeRequests().anyRequest().permitAll().and().csrf().disable();
-			http.headers().frameOptions().disable();
-		}
-
-	}
-	
-	@Configuration
-	@Order(3)	
 	public static class BasicAuthProtectionForApp extends WebSecurityConfigurerAdapter {
 
 		@Override

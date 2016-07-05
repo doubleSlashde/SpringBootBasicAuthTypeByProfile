@@ -15,10 +15,16 @@ public class HelloController {
 	public String index() {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
 		UserDetails currentUser = (UserDetails) authentication.getPrincipal();
+
 		return MessageFormat.format("Hello {0} [your role(s): {1}]!", currentUser.getUsername(),
 				currentUser.getAuthorities());
+	}
+	
+	@RequestMapping("/anonymous")
+	public String anonymous() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return MessageFormat.format("Hello {0}!", authentication.getPrincipal());
 	}
 
 }
