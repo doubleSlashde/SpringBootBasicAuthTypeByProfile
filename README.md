@@ -41,12 +41,12 @@ Logindaten siehe application.properties.
 ## Nach dem Start
 
 Wenn die Applikation mit einem dieser Profile gestartet wurde kann man sich unter
-_http://localhost:8080_ mit Basic Authentication einloggen.
+_http://localhost:8080/protected_ mit Basic Authentication einloggen.
 
 1. Benutzernamen und Passwort bei JDBC _(siehe UserInit in Package user)_: ``ben/userFromDB``
 2. Benutzernamen und Passwort bei DAO _(siehe UserInit in Package user)_: ``ben/userFromDB``
 2. Benutzernamen und Passwort bei LDAP _(siehe src/main/resources/test-server.ldif)_ z.B.: ``ben/benspassword``
-3. Benutzernamen und Passwort bei InMemory _(siehe AuthenticationConfigurationInMemory und application.properties)_: ``user/fromConfigFile`` 
+3. Benutzernamen und Passwort bei InMemory _(siehe AuthenticationConfigurationInMemory und application.properties)_: ``myuser/a`` 
 
 
 ## Quellen und Links

@@ -68,5 +68,5 @@ public class User {
 	public void setEnabled(final boolean enabled) {
 		this.enabled = enabled;
 	}
-
+	
 }

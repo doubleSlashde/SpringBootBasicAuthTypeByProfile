@@ -15,6 +15,9 @@ public class AuthenticationConfigurationInmemory extends GlobalAuthenticationCon
 
 	private static final Logger LOG = LoggerFactory.getLogger(AuthenticationConfigurationInmemory.class);
 
+	@Value("${my.config.user.name:user}")
+	private String username;
+
 	// siehe application.properties. Kann durch VM-Argument beim Start überschrieben werden.
 	// Weitere Möglichkeiten siehe:
 	// http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
@@ -22,12 +25,16 @@ public class AuthenticationConfigurationInmemory extends GlobalAuthenticationCon
 	// werden:
 	@Value("${my.config.user.pw:hardcodedDefault}")
 	private String pw;
+	
+	@Value("${my.config.user.roles:ADMIN}")
+	private String[] roles;
+	
 
 	@Autowired
 	public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
 
 		LOG.debug("configuring inmemory auth");
 
-		auth.inMemoryAuthentication().withUser("user").password(pw).roles("USER");
+		auth.inMemoryAuthentication().withUser(username).password(pw).roles(roles);
 	}
 }

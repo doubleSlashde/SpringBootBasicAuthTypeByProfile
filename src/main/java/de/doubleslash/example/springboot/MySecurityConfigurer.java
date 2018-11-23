@@ -13,23 +13,26 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class MySecurityConfigurer extends WebSecurityConfigurerAdapter {
 
+	@SuppressWarnings("unused")
 	private static final Logger LOG = LoggerFactory.getLogger(MySecurityConfigurer.class);
 
 	@Configuration
 	@Order(1)
-	// H2-Konsole nur in Profil "dev". Diese ist unter http://localhost:8080/h2-console verfügbar. 
-	// Login-Daten für H2 siehe application.properties. 
+	// H2-Konsole nur in Profil "dev". Diese ist unter
+	// http://localhost:8080/h2-console verfügbar.
+	// Login-Daten für H2 siehe application.properties.
 	@Profile("dev")
 	public static class H2AuthConf extends WebSecurityConfigurerAdapter {
-		
+
 		@Override
 		protected void configure(final HttpSecurity http) throws Exception {
 
-			// Für H2-Konsole keine Authentifizierung. Diese ist nur in Profil "dev" aktiv, siehe oben...
+			// Für H2-Konsole keine Authentifizierung. Diese ist nur in Profil "dev" aktiv,
+			// siehe oben...
 			http.antMatcher("/h2-console/**").authorizeRequests().anyRequest().permitAll().and().csrf().disable();
 			http.headers().frameOptions().disable();
 		}
-		
+
 	}
 
 	@Configuration
@@ -39,17 +42,32 @@ public class MySecurityConfigurer extends WebSecurityConfigurerAdapter {
 		@Override
 		protected void configure(final HttpSecurity http) throws Exception {
 			http.authorizeRequests() //
-					.anyRequest().authenticated() //
+					.antMatchers("/protected").fullyAuthenticated() //
 					.and() //
 					.httpBasic();
+			
 		}
 
 	}
 
+	
+	@Configuration
+	@Order(3)
+	public static class Anonymous extends WebSecurityConfigurerAdapter {
+
+		@Override
+		protected void configure(final HttpSecurity http) throws Exception {
+			http.authorizeRequests() //
+					.antMatchers("/anonymous").anonymous();
+			
+		}
+
+	}
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// here we only configured basic auth.
-	// please also see packages ldap and jdbc for configuration of credential source.
+	// please also see packages ldap and jdbc for configuration of credential
+	// source.
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 }
