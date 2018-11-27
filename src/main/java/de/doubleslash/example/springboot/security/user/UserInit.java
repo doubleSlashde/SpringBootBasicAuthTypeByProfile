@@ -1,7 +1,7 @@
-package de.doubleslash.example.springboot.user;
+package de.doubleslash.example.springboot.security.user;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import de.doubleslash.example.springboot.user.User.Role;
+import de.doubleslash.example.springboot.security.user.UserEntity.Role;
 
 @Component
 @Profile({ "dao", "jdbc" })
@@ -24,15 +24,16 @@ public class UserInit implements CommandLineRunner {
 	@Override
 	public void run(final String... args) throws Exception {
 
-		LOG.debug("creating user");
+		LOG.debug("Creating user...");
 		
-		final User user = new User("ben",
+		final UserEntity user = new UserEntity("ben",
 				// Passwort hashen
 				new BCryptPasswordEncoder().encode("userFromDB"), //
 				true, Role.ADMIN);
 		userRepo.save(user);
 		
-		LOG.debug("created user " + ReflectionToStringBuilder.toString(user, ToStringStyle.SHORT_PREFIX_STYLE));
+		LOG.debug("Created the following user: {}", // 
+				ReflectionToStringBuilder.toString(user, ToStringStyle.SHORT_PREFIX_STYLE));
 
 	}
 

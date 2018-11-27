@@ -36,7 +36,7 @@ objectclass: inetOrgPerson
 cn: Ben Alex
 sn: Alex
 uid: ben
-userPassword: {SHA}nFCebWjxfaLbHHG1Qk5UU4trbvQ=
+userPassword: {SHA-1}nFCebWjxfaLbHHG1Qk5UU4trbvQ=
 
 dn: uid=bob,ou=people,dc=springframework,dc=org
 objectclass: top

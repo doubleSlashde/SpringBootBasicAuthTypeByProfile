@@ -1,0 +1,7 @@
+
+- upgrade to spring boot 2
+- formbased login
+- why is sometimes remembered?
+- add oauth with google
+
+

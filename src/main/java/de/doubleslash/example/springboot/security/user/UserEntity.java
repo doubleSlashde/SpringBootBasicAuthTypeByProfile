@@ -1,14 +1,16 @@
-package de.doubleslash.example.springboot.user;
+package de.doubleslash.example.springboot.security.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class UserEntity {
 
 	public enum Role {
 		USER, ADMIN
@@ -24,12 +26,13 @@ public class User {
 	private boolean enabled = true;
 
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	public User() {
+	public UserEntity() {
 	}
 
-	public User(final String username, final String password, final boolean enabled, final Role role) {
+	public UserEntity(final String username, final String password, final boolean enabled, final Role role) {
 		super();
 		this.username = username;
 		this.password = password;

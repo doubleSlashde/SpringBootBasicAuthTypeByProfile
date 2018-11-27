@@ -1,4 +1,4 @@
-package de.doubleslash.example.springboot;
+package de.doubleslash.example.springboot.restapi;
 
 import java.text.MessageFormat;
 import java.util.stream.Collectors;
